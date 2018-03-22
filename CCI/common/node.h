@@ -9,8 +9,8 @@ struct Node {
     Node* next;
 
     Node() : data{T()}, next{nullptr} {}
-    Node(const T& d) : data{d}, next{nullptr} { std::cout << "Node const T& c-tor\n"; }
-    Node(T&& d) : data{std::move(d)}, next{nullptr} { std::cout << "Node move c-tor\n";  }
+    Node(const T& d) : data{d}, next{nullptr} { /*std::cout << "Node const T& c-tor\n";*/ }
+    Node(T&& d) : data{std::move(d)}, next{nullptr} { /* std::cout << "Node move c-tor\n"; */ }
 
     Node(const T& d, Node* ptr) : data{d}, next{ptr} { /*std::cout << "Node const T& c-tor\n";*/ }
 };

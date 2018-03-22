@@ -7,6 +7,7 @@
 #include "polindrome.h"
 #include "utils.h"
 #include "listUtils.h"
+#include "permutate.h"
 
 int main() {
     // my comment
@@ -31,6 +32,9 @@ int main() {
     // is polindrome
     std::vector<Node<int>> poliv = {1, 2, 3, 4, 5, 6};
     connectListElements(poliv.begin(), poliv.end());
+    
+    // permutate
+    permutate(*poliv.begin());
 
     return 0;
 }
