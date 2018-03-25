@@ -2,6 +2,7 @@
 #include <iostream>
 #include <sstream>
 #include <vector>
+#include <list>
 #include "node.h"
 #include "listLoopFinder.h"
 #include "polindrome.h"
@@ -34,7 +35,8 @@ int main() {
     connectListElements(poliv.begin(), poliv.end());
     
     // permutate
-    permutate(*poliv.begin());
+    std::list<int> l = {4,3,7,5,9,11,1};
+    permutate(l.begin(), l.end(), 3);
 
     return 0;
 }
