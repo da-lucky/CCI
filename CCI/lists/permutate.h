@@ -12,8 +12,48 @@
 #include "node.h"
 
 template <typename T>
-void permutate(Node<T>& listStart, const T& p) {
+Node<T>* permutate(Node<T>* listStart, const T& p) {
     
+    if(nullptr == listStart) {
+        return;
+    }
+    
+    Node<T>* lowerPart = nullptr, lowerPartHead = nullptr;
+    Node<T>* greterPart = nullptr, greterPartHead = nullptr;
+    
+    /* prepare two sublists with elements lower than pattern and greater or equal */
+    while(listStart) {
+        if(listStart->data < p) {
+            if(lowerPart) {
+                lowerPart->next = listStart;
+            } else {
+                lowerPartHead = listStart;
+                lowerPart = lowerPartHead;
+            }
+        } else {
+            if(greterPart) {
+                greterPart->next = listStart;
+            } else {
+                greterPartHead = greterPart;
+                greterPart = greterPartHead;
+            }
+        }
+        listStart = listStart->next;
+        if(lowerPart) {
+            lowerPart->next = nullptr;
+        }
+        if(greterPart) {
+            greterPart->next = nullptr;
+        }
+    }
+    
+    Node<T>* rez = nullptr;
+    /* merge two lists */
+    if(lowerPartHead) {
+        rez = lowerPartHead;
+    }
+    
+    return rez;
 }
 
 template <typename FwIt, typename Predicate>
