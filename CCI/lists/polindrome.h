@@ -6,8 +6,8 @@
 
 template <typename T>
 bool poly(const Node<T>& node) {
-    const auto slow = &node;
-    const auto fast = &node;
+    auto slow = &node;
+    auto fast = &node;
     std::stack<const Node<T>*> st {};
 
     if(nullptr == node.next) {
@@ -25,13 +25,13 @@ bool poly(const Node<T>& node) {
         return (node.data == slow->data);
     }
 
-    // even number of elements
-    if(nullptr == fast) {
+    // odd number of elements
+    if(fast) {
         slow = slow->next;
     }
 
     while(slow) {
-        if(*slow->data != st.top()) {
+        if(slow->data != st.top()->data) {
             return false;
         }
         st.pop();
