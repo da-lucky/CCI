@@ -15,34 +15,35 @@ template <typename T>
 Node<T>* permutate(Node<T>* listStart, const T& p) {
     
     if(nullptr == listStart) {
-        return;
+        return nullptr;
     }
-    
-    Node<T>* lowerPart = nullptr, lowerPartHead = nullptr;
-    Node<T>* greterPart = nullptr, greterPartHead = nullptr;
+
+    Node<T>* lowerPart = nullptr;
+    Node<T>* lowerPartHead = nullptr;
+    Node<T>* greterPart = nullptr;
+    Node<T>* greterPartHead = nullptr;
     
     /* prepare two sublists with elements lower than pattern and greater or equal */
     while(listStart) {
         if(listStart->data < p) {
             if(lowerPart) {
                 lowerPart->next = listStart;
+                lowerPart = lowerPart->next;
             } else {
                 lowerPartHead = listStart;
                 lowerPart = lowerPartHead;
             }
+            listStart = listStart->next;
+            lowerPart->next = nullptr;
         } else {
             if(greterPart) {
                 greterPart->next = listStart;
+                greterPart = greterPart->next;
             } else {
-                greterPartHead = greterPart;
+                greterPartHead = listStart;
                 greterPart = greterPartHead;
             }
-        }
-        listStart = listStart->next;
-        if(lowerPart) {
-            lowerPart->next = nullptr;
-        }
-        if(greterPart) {
+            listStart = listStart->next;
             greterPart->next = nullptr;
         }
     }
@@ -51,8 +52,11 @@ Node<T>* permutate(Node<T>* listStart, const T& p) {
     /* merge two lists */
     if(lowerPartHead) {
         rez = lowerPartHead;
+        lowerPart->next = greterPartHead;
+    } else {
+        rez = greterPartHead;
     }
-    
+
     return rez;
 }
 

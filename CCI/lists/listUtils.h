@@ -19,4 +19,14 @@ void connectListElements(It b, It e) {
     }
 }
 
+template <typename T>
+void printCont(const Node<T>& n) {
+    std::stringstream ss;
+    auto r = &n;
+    while(r) {
+        ss <<  r->data << " ";
+        r = r->next;
+    }
+    std::cout <<ss.str() << std::endl;
+}
 #endif //LISTS_LISTUTILS_H
