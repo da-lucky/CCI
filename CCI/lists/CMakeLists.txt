@@ -6,4 +6,4 @@ set(EXECUTABLE_OUTPUT_PATH ${CMAKE_SOURCE_DIR})
 
 include_directories(../common/)
 
-add_executable(lists main.cpp)
+add_executable(lists main.cpp ../common/node.h ../common/utils.h permutate.h listLoopFinder.h listUtils.h polindrome.h)
