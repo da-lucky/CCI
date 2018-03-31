@@ -1,4 +1,8 @@
+.DS_Store
+.DS_Store/
 .idea/*
 cmake-build-debug/*
 /lists/lists
 /lists/TMP/*
+/lists/Debug/*
+/lists/build.release/*
