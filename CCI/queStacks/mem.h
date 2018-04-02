@@ -16,7 +16,7 @@
 template<typename T>
 class Mem {
 public:
-    static constexpr std::size_t MEM_SIZE = 3;
+    static constexpr std::size_t MEM_SIZE = 10;
     using value_type = Node<T>;
     using value_pointer = Node<T>*;
 
