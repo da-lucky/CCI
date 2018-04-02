@@ -60,7 +60,7 @@ public:
     Mem(const Mem&) = delete;
     Mem& operator=(const Mem&) = delete;
     
-    value_pointer popFree() {
+    value_pointer allocate() {
         auto tmp = currFree;
         if(currFree) {
             currFree = currFree->next;
@@ -69,7 +69,7 @@ public:
         return tmp;
     }
     
-    void pushFree(value_pointer p) {
+    void deallocate(value_pointer p, std::size_t) {
         if(ptrCorrect(p)) {
             if (nullptr == p) {
                 return;
