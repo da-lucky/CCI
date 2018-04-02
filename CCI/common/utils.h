@@ -13,4 +13,15 @@ void printCont(const Cont& c) {
     std::cout <<ss.str() << std::endl;
 }
 
+template <typename It>
+void connectListElements(It b, It e) {
+    if(b != e) {
+        It p = b;
+        while (++p != e) {
+            conn(*b, *p);
+            ++b;
+        }
+    }
+}
+
 #endif //COMMON_UTILS_H

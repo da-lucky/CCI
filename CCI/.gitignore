@@ -6,3 +6,7 @@ cmake-build-debug/*
 /lists/TMP/*
 /lists/Debug/*
 /lists/build.release/*
+/queStacks/queStacks
+/queStacks/TMP/*
+/queStacks/Debug/*
+/queStacks/build.release/*
