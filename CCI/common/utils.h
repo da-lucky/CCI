@@ -13,6 +13,18 @@ void printCont(const Cont& c) {
     std::cout <<ss.str() << std::endl;
 }
 
+template <typename T>
+void printCont(const std::stack<T>& s) {
+    std::stringstream ss;
+
+    std::stack<T> tmp = s;
+    while(!tmp.empty()) {
+        ss << tmp.top() << " ";
+        tmp.pop();
+    }
+    std::cout <<ss.str() << std::endl;
+}
+
 template <typename It>
 void connectListElements(It b, It e) {
     if(b != e) {
