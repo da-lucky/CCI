@@ -32,8 +32,7 @@ void stackSort(std::stack<T>& s, Cmp comp = Cmp{}) {
         T tmp(std::move(s.top()));
         s.pop();
 
-        auto c = elCount - 1;
-        while (c--) {
+        while (! s.empty()) {
             if (comp(s.top(), tmp)) {
                 tmpS.emplace(std::move(tmp));
                 tmp = std::move(s.top());
