@@ -43,9 +43,9 @@ void createTree(std::vector<std::unique_ptr<treeNode<char>>>& v) {
 	/*C*/v[2]->right = v[12].get();/*M*/
 }
 
-//--------------------- Post order traverse -----------------------------
+//--------------------- Symmetric traverse -----------------------------
 template <typename U, typename F>
-void traverseTreePostO(treeNode<U>* nodePtr, F nodeProc) {		
+void traverseTreeSymmetric(treeNode<U>* nodePtr, F nodeProc) {		
 	
 	std::stack<treeNode<U>*> node_s {};
 	std::size_t max = 0, min = 0, cnt = 0;
@@ -67,11 +67,11 @@ void traverseTreePostO(treeNode<U>* nodePtr, F nodeProc) {
 }
 
 template <typename U, typename F>
-void traverseTreePostORec(treeNode<U>* nodePtr, F nodeProc) {
+void traverseTreeSymmetricRec(treeNode<U>* nodePtr, F nodeProc) {
 	if(nodePtr) {
-		traverseTreePostORec(nodePtr->left, nodeProc);
+		traverseTreeSymmetricRec(nodePtr->left, nodeProc);
 		nodeProc(nodePtr->data);
-		traverseTreePostORec(nodePtr->right, nodeProc);
+		traverseTreeSymmetricRec(nodePtr->right, nodeProc);
 		
 	}
 }
@@ -117,6 +117,17 @@ void traverseTreePreORec(treeNode<U>* nodePtr, F nodeProc) {
 	}
 }
 
+//--------------------- Post order traverse -----------------------------
+template <typename U, typename F>
+void traverseTreePostORec(treeNode<U>* nodePtr, F nodeProc) {
+	
+	if(nodePtr) {		
+		traverseTreePostORec (nodePtr->left, nodeProc);
+		traverseTreePostORec (nodePtr->right, nodeProc);
+		nodeProc(nodePtr->data);
+	}
+}
+
 //----------------- check for tree balancing -----------------------
 template <typename U>
 bool tBalaced(treeNode<U>* nodePtr) {
@@ -150,12 +161,12 @@ int main() {
 	createTree(v);
 	treeNode<char>* node = v.front().get();
 	
-	std::cout << "Post Order \n";
-	traverseTreePostO(node, [](char n) { std::cout << n << " " ;});
+	std::cout << "Symmetric order\n";
+	traverseTreeSymmetric(node, [](char n) { std::cout << n << " " ;});
 	std::cout << "\n";
 	
-	std::cout << "Post Order recurse\n";
-	traverseTreePostORec(node, [](char n) { std::cout << n << " " ;});
+	std::cout << "Symmetric order recurse\n";
+	traverseTreeSymmetricRec(node, [](char n) { std::cout << n << " " ;});
 	std::cout << "\n";
 	
 	std::cout << "Pre Order \n";
@@ -164,6 +175,10 @@ int main() {
 	
 	std::cout << "Pre Order  recurse\n";	
 	traverseTreePreORec(node, [](char n) { std::cout << n << " " ;});
+	std::cout << "\n";
+	
+	std::cout << "Post Order  recurse\n";	
+	traverseTreePostORec(node, [](char n) { std::cout << n << " " ;});
 	std::cout << "\n";
 	
 	std::cout << std::boolalpha;
