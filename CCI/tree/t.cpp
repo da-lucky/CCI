@@ -140,7 +140,7 @@ bool tBalaced(treeNode<U>* nodePtr) {
 
 template <typename U>
 int treeBalanceCheck(treeNode<U>* nodePtr, bool& status) {
-	if(nodePtr) {	
+	if(nodePtr && status) {
 		auto l = treeBalanceCheck(nodePtr->left, status) + 1;
 		auto r = treeBalanceCheck(nodePtr->right, status) + 1;
 			
@@ -154,6 +154,33 @@ int treeBalanceCheck(treeNode<U>* nodePtr, bool& status) {
 		return 0;
 	}
 }
+
+
+//----------------- check for BST -----------------------
+template <typename U>
+U* BSTCheck(treeNode<U>* nodePtr, bool& status) {
+	
+	if(nodePtr && status) {
+		U* l = BSTCheck(nodePtr->left, status);
+		if(l && (nodePtr->data < *l)) { status = false; std::cout << "left descendant " << *l << " gt than " << nodePtr->data << "\n"; }
+		
+		U* r = BSTCheck(nodePtr->right, status);		
+		if(r && (nodePtr->data >= *r)) { status = false; std::cout << "right descendant " << *r << " lt or eq than " << nodePtr->data << "\n"; }
+		
+		if(status) {
+			return  &(nodePtr->data);
+		}
+	} 
+	return nullptr;	
+}
+
+template <typename U>
+bool isBST(treeNode<U>* nodePtr){
+	bool ret = true;
+	BSTCheck(nodePtr, ret);
+	return	ret;
+}
+
 
 int main() {
 
@@ -182,6 +209,6 @@ int main() {
 	std::cout << "\n";
 	
 	std::cout << std::boolalpha;
-	std::cout << "is tree balanced: " << tBalaced(node) << "\n";	
+	std::cout << "\tis tree balanced: " << tBalaced(node)  << "\n\tis BST: " << isBST(node) << "\n";
 }
 
