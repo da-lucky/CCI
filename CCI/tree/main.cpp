@@ -1,3 +1,4 @@
+#include <cstdint>
 #include "tree.hpp"
 
 void createTree(std::vector<std::unique_ptr<treeNode<char>>>& v) {
@@ -59,7 +60,9 @@ int main() {
 	/* Task 1 : checking whether tree is balanced */	
 	std::cout << "\tis tree balanced: " << tBalaced(node) << "\n";
 	
-	/* Task 2 : checking whether tree Binary Search Tree */	
-	std::cout << "\n\tis BST: " << isBST(node) << "\n";
+	/* Task 2 : checking whether tree Binary Search Tree */
+    char MIN = 0;
+    char MAX = INT8_MAX;
+    std::cout << "\n\tis BST: " << BSTCheck(node, MIN, MAX) << "\n";
 }
 

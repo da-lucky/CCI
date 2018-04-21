@@ -127,27 +127,29 @@ int treeBalanceCheck(treeNode<U>* nodePtr, bool& status) {
 
 //----------------- check for BST -----------------------
 template <typename U>
-U* BSTCheck(treeNode<U>* nodePtr, bool& status) {
-	
-	if(nodePtr && status) {
-		U* l = BSTCheck(nodePtr->left, status);
-		if(l && (nodePtr->data < *l)) { status = false; std::cout << "left descendant " << *l << " gt than " << nodePtr->data << "\n"; }
-		
-		U* r = BSTCheck(nodePtr->right, status);		
-		if(r && (nodePtr->data >= *r)) { status = false; std::cout << "right descendant " << *r << " lt or eq than " << nodePtr->data << "\n"; }
-		
-		if(status) {
-			return  &(nodePtr->data);
-		}
-	} 
-	return nullptr;	
-}
-
-template <typename U>
-bool isBST(treeNode<U>* nodePtr){
-	bool ret = true;
-	BSTCheck(nodePtr, ret);
-	return	ret;
+bool BSTCheck(treeNode<U>* nodePtr, const U& min, const U& max) {
+    if(nullptr == nodePtr) {
+        return false;
+    }
+    
+    if (nodePtr->data < min || nodePtr->data >= max) {
+        {
+            //DEBUG
+            if(nodePtr->data < min) {
+                std::cout << "current node " << nodePtr->data << " less than min " << min << "\n";
+            }
+            if(nodePtr->data >= max) {
+                std::cout << "current node " << nodePtr->data << " greater than max " << max << "\n";
+            }
+        }
+        return false;
+    }
+    
+    if ( !BSTCheck(nodePtr->left, min, nodePtr->data) ||
+        !BSTCheck(nodePtr->right, nodePtr->data, max)) {
+        return false;
+    }
+    return true;
 }
 
 #endif
