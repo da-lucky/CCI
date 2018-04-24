@@ -1,5 +1,9 @@
 #include <cstdint>
+#include <list>
 #include "tree.hpp"
+#include "graph.hpp"
+
+
 
 void createTree(std::vector<std::unique_ptr<treeNode<char>>>& v) {
 		
@@ -64,5 +68,12 @@ int main() {
     char MIN = 0;
     char MAX = INT8_MAX;
     std::cout << "\n\tis BST: " << BSTCheck(node, MIN, MAX) << "\n";
+	
+	/* DFS graph search */
+	{
+		std::cout << "Graph traverse\n";
+		createGraphAdjList();
+		DFS();
+	}
 }
 

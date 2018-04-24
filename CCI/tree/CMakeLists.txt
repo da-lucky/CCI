@@ -6,4 +6,4 @@ set(EXECUTABLE_OUTPUT_PATH ${CMAKE_SOURCE_DIR})
 
 include_directories(../common/)
 
-add_executable(tree main.cpp ../common/node.h ../common/utils.h tree.hpp)
+add_executable(tree main.cpp graph.cpp ../common/node.h ../common/utils.h tree.hpp graph.hpp)
