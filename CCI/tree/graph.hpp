@@ -108,7 +108,7 @@ public:
             m_links[l].push_back(r);
         } else {
             std::stringstream ss;
-            ss << "left node idx " << std::to_string(l) << " or righ idx " << std::to_string(r) << " greater than size of cont " << std::to_string(NUM_NODES_IN_GRAPH);
+            ss << "left node idx " << std::to_string(l) << " or righ idx " << std::to_string(r) << " greater than size of cont " << size();
             std::cerr << ss.str() << "\n";
         }
     }
@@ -123,7 +123,7 @@ public:
             std::cout << ss.str() << "}\n";
         } else {
             std::stringstream ss;
-            ss << "idx " << std::to_string(idx) << " greater than size of cont " << std::to_string(NUM_NODES_IN_GRAPH);
+            ss << "idx " << std::to_string(idx) << " greater than size of cont " << size();
             std::cerr << ss.str() << "\n";
         }
     }
