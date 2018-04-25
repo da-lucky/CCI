@@ -72,7 +72,8 @@ int main() {
 	/* DFS graph search */
 	{
 		std::cout << "Graph traverse\n";
-		createGraphAdjList();
+        populateGrapNodesContainer();
+		prepareGraphAdjList();
 		DFS();
 	}
 }

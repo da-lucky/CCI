@@ -1,61 +1,37 @@
-#include "graph.hpp"
 #include <iostream>
+#include <deque>
+#include "graph.hpp"
 
-AdjacentNodesVectorT adjVector;
-std::vector<NodeColor> props;
+// global graph nodes container
+CGraphNodes<std::size_t, std::vector> g_graphNodes ;
 
-void createGraphAdjList() {
-	
-	for(auto i = 0; i < NUM_NODES_IN_GRAPH; i++) {
-		adjVector.push_back(std::list<std::size_t>{});
-	}
-	
-	adjVector[0].push_back(1);
-	adjVector[0].push_back(3);
-	
-	adjVector[1].push_back(4);
-	
-	adjVector[2].push_back(5);
-	adjVector[2].push_back(4);
-	
-	adjVector[3].push_back(1);
-	
-	adjVector[4].push_back(3);
-	
-	adjVector[5].push_back(5);
+void populateGrapNodesContainer() {
+    for(auto i = 0; i < NUM_NODES_IN_GRAPH; ++i) {
+        g_graphNodes.addNode(i);
+    }
+    std::cout << "Size of g_graphNodes " << g_graphNodes.size() << "\n";    
 }
 
-void initAdjCont() {
+void prepareGraphAdjList() {
 	
-	props.clear();	
-	for(auto i = 0; i < NUM_NODES_IN_GRAPH; i++) {
-		props.push_back(NodeColor::WHITE);
-	}
-}
+    g_graphNodes.addLink(0,1);
+    g_graphNodes.addLink(0,3);
 
-void DFSvisit(std::size_t idx) {
-	
-	std::cout << "Visit node " << idx << "\n";
-	
-	props[idx] = NodeColor::GRAY;	
-	
-	for(auto It = adjVector[idx].begin(); It != adjVector[idx].end() ; ++It) {
-		
-		if(NodeColor::WHITE == props[*It]) {
-			DFSvisit(*It);
-		}	
-	}
-	
-	props[idx] = NodeColor::BLACK;
+    g_graphNodes.addLink(1,4);
+
+    g_graphNodes.addLink(2,5);
+    g_graphNodes.addLink(2,4);
+
+    g_graphNodes.addLink(3,1);
+    g_graphNodes.addLink(4,3);
+    g_graphNodes.addLink(5,5);
+
+    for(auto i = 0; i < g_graphNodes.size(); i++) {
+        g_graphNodes.printNodeLinks(i);
+    }
 }
 
 void DFS() {
 
-	initAdjCont();
-	
-	for(std::size_t i = 0; i < adjVector.size(); i++) {
-		if(NodeColor::WHITE == props[i]) {
-			DFSvisit(i);
-		}
-	}
+    g_graphNodes.DFS();
 }
