@@ -35,3 +35,7 @@ void DFS() {
 
     g_graphNodes.DFS();
 }
+
+void BFS() {
+    g_graphNodes.BFS();
+}

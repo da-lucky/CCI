@@ -2,6 +2,7 @@
 #define GRAPH_HPP
 
 #include <vector>
+#include <queue>
 #include <exception>
 #include <array>
 #include <sstream>
@@ -129,6 +130,8 @@ public:
     }
 
     void DFS() {
+        std::cout << "DFS search\n";
+
         resetProps();        
         
         for(auto i = 0; i < size(); ++i) {
@@ -137,10 +140,40 @@ public:
             }
         }
     }
+
+    void BFS(std::size_t start = 0) {
+        std::cout << "BFS search\n";
+
+        resetProps();
+    
+        std::queue<std::size_t> q;
+        m_props[start].c = NodeColor::GRAY;
+        m_props[start].d = 0;
+
+        q.push(start);
+
+        while(q.size()) {
+            auto e = q.front();
+
+            std::cout << "\tnode " << e << " d = " << m_props[e].d << "\n";
+
+            for(auto& i: m_links[e]) {
+                if(NodeColor::WHITE == m_props[i].c) {
+                    m_props[i].c = NodeColor::GRAY;
+                    m_props[i].d = m_props[e].d + 1;
+                    q.push(i);
+                }
+            }
+
+            m_props[e].c = NodeColor::BLACK;            
+            q.pop();
+        }
+    }
 };
 
 void prepareGraphAdjList();
 void populateGrapNodesContainer();
 void DFS();
+void BFS();
 
 #endif

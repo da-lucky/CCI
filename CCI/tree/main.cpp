@@ -75,6 +75,7 @@ int main() {
         populateGrapNodesContainer();
 		prepareGraphAdjList();
 		DFS();
+        BFS();
 	}
 }
 
